@@ -31,11 +31,11 @@ function getNum(value) {
   value = String(value);
   let result = '';
   for (let i = 0; i < value.length; i++) {
-    if (!isNaN(parseInt(value[i]))) {
+    if (!isNaN(parseInt(value[i], 10))) {
       result += value[i];
     }
   }
-  return parseInt(result);
+  return parseInt(result, 10);
 }
 getNum('2023 год'); // 2023
 getNum('ECMAScript 2022'); // 2022
