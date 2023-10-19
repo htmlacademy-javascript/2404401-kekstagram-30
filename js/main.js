@@ -16,8 +16,8 @@ function createObject() {
   const obj = {
     id: createObjId(1, 25),
     url: createObjUrl(1, 25),
-    description: createObjDescription(0, 5),
-    likes: createObjLikes(15, 200),
+    description: DESCRIPTION[getRandomNumber(1,6)],
+    likes: getRandomNumber(15, 200),
     comments: createObjComments(0, 30),
   };
   commentsIdIndicate = 1;
@@ -42,30 +42,17 @@ function createObjUrl(min, max) {
   return `photos/${num}.jpg`;
 }
 
-function createObjDescription(min, max) {
-  return DESCRIPTION[getRandomNumber(min,max)];
-}
-
-function createObjLikes(min, max) {
-  return getRandomNumber(min, max);
-}
-
 function createObjComments(min, max) {
   const arrayComments = [];
 
   for (let i = 0; i <= getRandomNumber(min, max); i++) {
     arrayComments.push({
       id: commentsIdIndicate,
-      avatar: `img/avatar-${getAvatarNumber()}.svg`,
+      avatar: `img/avatar-${getRandomNumber(1, 6)}.svg`,
       message: COMMENTS_MESSAGE[getRandomNumber(0, COMMENTS_MESSAGE.length - 1)],
       name: getName(),
     });
     commentsIdIndicate += 1;
-  }
-
-  //avatar generation
-  function getAvatarNumber() {
-    return getRandomNumber(1, 6);
   }
 
   //name generation
