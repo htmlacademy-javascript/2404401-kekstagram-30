@@ -2,7 +2,6 @@ const COMMENTS_NAME = ['Артём', 'Олег', 'Антон', 'Вадим', 'С
 const DESCRIPTION = ['Великолепные пейзажи', 'Фото на память', 'Mood', 'Без слов', 'Как пить дать', 'Во всей красе'];
 let commentsIdIndicate = 1;
 const COMMENTS_MESSAGE = ['Всё отлично!', 'В целом всё неплохо. Но не всё.', 'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.', 'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.', 'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.', 'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',];
-const result = [];
 const ARRAY_URL = [];
 const ARRAY_ID = [];
 function getRandomNumber (min, max) {
@@ -12,7 +11,8 @@ function getRandomNumber (min, max) {
   return Math.floor(number);
 }
 
-function createObjectCard() {
+function createObject() {
+  const result = [];
   const obj = {
     id: createObjId(1, 25),
     url: createObjUrl(1, 25),
@@ -57,7 +57,7 @@ function createObjComments(min, max) {
     arrayComments.push({
       id: commentsIdIndicate,
       avatar: `img/avatar-${getAvatarNumber()}.svg`,
-      message: getMessage(),
+      message: COMMENTS_MESSAGE[getRandomNumber(0, COMMENTS_MESSAGE.length - 1)],
       name: getName(),
     });
     commentsIdIndicate += 1;
@@ -66,11 +66,6 @@ function createObjComments(min, max) {
   //avatar generation
   function getAvatarNumber() {
     return getRandomNumber(1, 6);
-  }
-
-  //message generation
-  function getMessage() {
-    return COMMENTS_MESSAGE[getRandomNumber(0, COMMENTS_MESSAGE.length - 1)];
   }
 
   //name generation
@@ -82,5 +77,5 @@ function createObjComments(min, max) {
 }
 
 for (let i = 0; i < 25; i++) {
-  createObjectCard();
+  createObject();
 }
