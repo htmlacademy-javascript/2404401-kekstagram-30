@@ -26,7 +26,7 @@ function createObjComments(min, max) {
       id: i + 1,
       avatar: `img/avatar-${getRandomNumber(1, 6)}.svg`,
       message: COMMENTS_MESSAGE[getRandomNumber(0, COMMENTS_MESSAGE.length - 1)],
-      name: COMMENTS_NAME[getRandomNumber(0, COMMENTS_MESSAGE.length - 1)],
+      name: COMMENTS_NAME[getRandomNumber(0, COMMENTS_NAME.length - 1)],
     });
   }
   return arrayComments;
@@ -36,7 +36,7 @@ function generatesPostsObject() {
   return {
     id: uniqueId(),
     url: `photos/${getRandomNumber(1, 25)}.jpg`,
-    description: DESCRIPTION[getRandomNumber(1,6)],
+    description: DESCRIPTION[getRandomNumber(0, DESCRIPTION.length - 1)],
     likes: getRandomNumber(15, 200),
     comments: createObjComments(0, 30),
   };
