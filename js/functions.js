@@ -45,3 +45,32 @@ getNum('а я томат'); // NaN
 getNum(2023); // 2023
 getNum(-1); // 1
 getNum(1.5); // 15
+
+
+/*
+'8:00' - начало рабочего дня
+'17:30' - конец рабочего дня
+'14:00' - начало встречи
+90 - продолжительность встречи в минутах
+*/
+const MINUTES = 60;
+
+function calculatorWorkTime(value) {
+  const getArrayInTime = value.split(':');
+  const minuteTime = parseInt(getArrayInTime[0], 10) * MINUTES + parseInt(getArrayInTime[1], 10);
+  return minuteTime;
+}
+
+function workTime(startWork, endWork, startMeeting, durationMeeting) {
+  const minutesInStart = calculatorWorkTime(startWork);
+  const minutesInEnd = calculatorWorkTime(endWork);
+  const minutesInMeeting = calculatorWorkTime(startMeeting);
+
+  return (minutesInStart <= minutesInMeeting && (minutesInMeeting + durationMeeting) <= minutesInEnd);
+}
+
+workTime('08:00', '17:30', '14:00', 90); // true
+workTime('8:0', '10:0', '8:0', 120); // true
+workTime('08:00', '14:30', '14:00', 90); // false
+workTime('14:00', '17:30', '08:0', 90); // false
+workTime('8:00', '17:30', '08:00', 900); // false
