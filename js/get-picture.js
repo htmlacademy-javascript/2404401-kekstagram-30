@@ -1,15 +1,19 @@
 import { arrayObjectPosts } from './data.js';
 
-const templatePicture = document.querySelector('#picture');
-//const bla = templatePicture.querySelector('a');
-const placePictures = document.querySelector('.picture');
+const templatePicture = document.querySelector('#picture').content;
+const placePictures = document.querySelector('.pictures');
 
 const arrayPhoto = arrayObjectPosts;
-console.log(templatePicture);
+const picturesFragment = document.createDocumentFragment();
 
 arrayPhoto.forEach(({url, description, likes, comments}) => {
   const picture = templatePicture.cloneNode(true);
-
+  picture.querySelector('.picture__img').src = url;
+  picture.querySelector('.picture__img').alt = description;
+  picture.querySelector('.picture__likes').textContent = likes;
+  picture.querySelector('.picture__comments').textContent = comments.length;
+  picturesFragment.appendChild(picture);
 });
 
-export {bla};
+placePictures.appendChild(picturesFragment);
+export {placePictures};
