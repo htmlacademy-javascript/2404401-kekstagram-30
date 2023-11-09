@@ -1,4 +1,4 @@
-import { arrayObjectPosts } from './data.js';
+/* eslint-disable no-console */
+import { placePictures } from './get-picture';
 
-// eslint-disable-next-line no-console
-console.log(arrayObjectPosts);
+console.log(placePictures);
