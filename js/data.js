@@ -16,10 +16,11 @@ function createObjComments(min, max) {
   return arrayComments;
 }
 const uniqueId = generatesUniqueId(1, 25);
+const uniqPhoto = generatesUniqueId(1, 25);
 function generatesPostsObject() {
   return {
     id: uniqueId(),
-    url: `photos/${getRandomNumber(1, 25)}.jpg`,
+    url: `photos/${uniqPhoto()}.jpg`,
     description: DESCRIPTION[getRandomNumber(0, DESCRIPTION.length - 1)],
     likes: getRandomNumber(15, 200),
     comments: createObjComments(0, 30),
