@@ -16,4 +16,6 @@ function generatesUniqueId(min, max) {
   };
 }
 
-export { getRandomNumber, generatesUniqueId };
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+export { getRandomNumber, generatesUniqueId, isEscapeKey };

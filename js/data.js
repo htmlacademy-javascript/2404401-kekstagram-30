@@ -15,11 +15,13 @@ function createObjComments(min, max) {
   }
   return arrayComments;
 }
+
 const uniqueId = generatesUniqueId(1, 25);
+const uniqueIdPic = generatesUniqueId(1, 25);
 function generatesPostsObject() {
   return {
     id: uniqueId(),
-    url: `photos/${getRandomNumber(1, 25)}.jpg`,
+    url: `photos/${uniqueIdPic(1, 25)}.jpg`,
     description: DESCRIPTION[getRandomNumber(0, DESCRIPTION.length - 1)],
     likes: getRandomNumber(15, 200),
     comments: createObjComments(0, 30),
@@ -27,5 +29,4 @@ function generatesPostsObject() {
 }
 // eslint-disable-next-line no-unused-vars
 const arrayObjectPosts = Array.from({ length: POSTS_COUNT }, generatesPostsObject);
-
 export { arrayObjectPosts };

@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
+/* eslint-disable no-unused-vars */
 import { placePictures } from './get-picture';
-
-console.log(placePictures);
+import { miniaturePictures } from './big-picture';
