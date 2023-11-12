@@ -18,5 +18,4 @@ function getCommentsList(current) {
 
   bigPictureCommentsContainer.appendChild(createCommentsList);
 }
-
 export { getCommentsList };
