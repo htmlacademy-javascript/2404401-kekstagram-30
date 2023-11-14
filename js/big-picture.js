@@ -14,8 +14,6 @@ function closeModalBigPicture() {
 function openModalBigPicture() {
   modalBigPicture.classList.remove('hidden');
   document.querySelector('body').classList.add('modal-open');
-  document.querySelector('.social__comment-count').classList.add('hidden');
-  document.querySelector('.comments-loader').classList.add('hidden');
 }
 function onModalEscapeKeydown() {
   document.addEventListener('keydown', (evt) => {
