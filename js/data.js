@@ -7,7 +7,6 @@ const uniqueId = generatesUniqueId(1, 25);
 const uniqueIdPic = generatesUniqueId(1, 25);
 let uniqueIdComments = 1;
 
-
 function createObjComments() {
   return {
     id: uniqueIdComments++,
