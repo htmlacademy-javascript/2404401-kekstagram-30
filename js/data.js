@@ -23,10 +23,9 @@ function generatesPostsObject() {
     url: `photos/${uniqueIdPic(1, 25)}.jpg`,
     description: DESCRIPTION[getRandomNumber(0, DESCRIPTION.length - 1)],
     likes: getRandomNumber(15, 200),
-    comments: Array.from({length: getRandomNumber(1, 30)}, createObjComments),
+    comments: Array.from({length: getRandomNumber(5, 30)}, createObjComments),
   };
 }
 // eslint-disable-next-line no-unused-vars
 const arrayObjectPosts = Array.from({ length: POSTS_COUNT }, generatesPostsObject);
-console.log(arrayObjectPosts)
 export { arrayObjectPosts };

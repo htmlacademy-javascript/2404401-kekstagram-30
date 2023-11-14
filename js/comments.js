@@ -1,26 +1,33 @@
 import { arrayObjectPosts } from './data';
-import { filterDefault, commentsHandler } from './comments-filter';
+import { getComment, commentFilterDefault } from './comments-filter';
 
 const bigPictureCommentsContainer = document.querySelector('.social__comments');
-const bigPictureCommentItem = bigPictureCommentsContainer.querySelector('.social__comment');
+const templateComment = document.querySelector('#comment').content;
 const btnLoader = document.querySelector('.comments-loader');
-
 
 function getCommentsList(current) {
   bigPictureCommentsContainer.innerHTML = '';
   const createCommentsList = document.createDocumentFragment();
+  let commentArray = [];
 
-  arrayObjectPosts[current].comments.forEach((value) => {
-    const commentIteration = bigPictureCommentItem.cloneNode(true);
-    commentIteration.querySelector('.social__text').textContent = value.message;
-    commentIteration.querySelector('.social__picture').src = value.avatar;
-    commentIteration.querySelector('.social__picture').alt = value.name;
-    createCommentsList.appendChild(commentIteration);
+  arrayObjectPosts.forEach(({id, comments}) => {
+    // eslint-disable-next-line eqeqeq
+    if (id == current) {
+      commentArray = comments;
+    }
   });
-  bigPictureCommentsContainer.appendChild(createCommentsList);
 
-  filterDefault();
+  commentArray.forEach((value) => {
+    const comment = templateComment.cloneNode(true);
+    comment.querySelector('.social__text').textContent = value.message;
+    comment.querySelector('.social__picture').src = value.avatar;
+    comment.querySelector('.social__picture').alt = value.name;
+    createCommentsList.appendChild(comment);
+    bigPictureCommentsContainer.appendChild(createCommentsList);
+  });
+
+  commentFilterDefault();
 }
+btnLoader.addEventListener('click', getComment);
 
-btnLoader.addEventListener('click', commentsHandler);
 export { getCommentsList };

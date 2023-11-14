@@ -5,7 +5,7 @@ import { getCommentsList } from './comments.js';
 const modalBigPicture = document.querySelector('.big-picture');
 const infoModalBigPicture = document.querySelector('.big-picture__social');
 const miniaturePictures = placePictures.querySelectorAll('.picture');
-const closeModalButton = modalBigPicture.querySelector('.big-picture__cancel');
+//const closeModalButton = modalBigPicture.querySelector('.big-picture__cancel');
 
 function closeModalBigPicture() {
   modalBigPicture.classList.add('hidden');
@@ -38,8 +38,8 @@ miniaturePictures.forEach((miniaturePicture) => {
     getCommentsList(currentId);
   });
 });
-closeModalButton.addEventListener('click', () => {
-  closeModalBigPicture();
-});
+// closeModalButton.addEventListener('click', () => {
+//   closeModalBigPicture();
+// });
 
 export { miniaturePictures };
