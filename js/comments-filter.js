@@ -37,5 +37,4 @@ closeModalButton.addEventListener('click', () => {
   closeModalBigPicture();
 });
 
-
 export { getComment, commentFilterDefault, closeModalBigPicture };
