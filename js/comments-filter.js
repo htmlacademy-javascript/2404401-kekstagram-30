@@ -28,7 +28,6 @@ function getComment() {
     }
   }
   showCount += COMMENT_COUNT;
-  //count.textContent = showCount;
   return showCount;
 }
 closeModalButton.addEventListener('click', () => {
