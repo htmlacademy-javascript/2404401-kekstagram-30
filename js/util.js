@@ -15,8 +15,16 @@ function generatesUniqueId(min, max) {
     return num;
   };
 }
-
 const isEscapeKey = (evt) => evt.key === 'Escape';
+
+const stopIsEscapeKey = (element) => {
+  element.addEventListener('keydown', (evt) => {
+    if (isEscapeKey(evt)) {
+      evt.stopPropagation();
+    }
+  });
+};
+
 
 function onModalEscapeKeydown(callback) {
   document.addEventListener('keydown', (evt) => {
@@ -26,6 +34,13 @@ function onModalEscapeKeydown(callback) {
     }
   }, { once: true });
 }
+const checkStringLength = (string, maxLength) => string.length <= maxLength;
+const isRepeatElement = (array) => array.length !== new Set(array).size;
 
 export { isEscapeKey };
-export { getRandomNumber, generatesUniqueId, onModalEscapeKeydown };
+export { getRandomNumber };
+export { checkStringLength };
+export { isRepeatElement };
+export { generatesUniqueId };
+export { onModalEscapeKeydown };
+export { stopIsEscapeKey };

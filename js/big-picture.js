@@ -6,6 +6,7 @@ const modalBigPicture = document.querySelector('.big-picture');
 const infoModalBigPicture = document.querySelector('.big-picture__social');
 const miniaturePictures = placePictures.querySelectorAll('.picture');
 const closeModalButton = modalBigPicture.querySelector('.big-picture__cancel');
+const inputCommentBigPicture = document.querySelector('.social__footer-text');
 
 function closeModalBigPicture() {
   modalBigPicture.classList.add('hidden');
@@ -16,11 +17,16 @@ function openModalBigPicture() {
   document.querySelector('body').classList.add('modal-open');
 }
 
+
+inputCommentBigPicture.addEventListener('blur', () => {
+  onModalEscapeKeydown(closeModalBigPicture);
+});
+
 miniaturePictures.forEach((miniaturePicture) => {
   miniaturePicture.addEventListener('click', (evt) => {
     evt.preventDefault();
     openModalBigPicture();
-    onModalEscapeKeydown();
+    onModalEscapeKeydown(closeModalBigPicture);
 
     modalBigPicture.querySelector('img').src = miniaturePicture.querySelector('.picture__img').src;
     infoModalBigPicture.querySelector('.likes-count').textContent = miniaturePicture.querySelector('.picture__likes').textContent;
