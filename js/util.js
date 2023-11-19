@@ -15,7 +15,32 @@ function generatesUniqueId(min, max) {
     return num;
   };
 }
-
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-export { getRandomNumber, generatesUniqueId, isEscapeKey };
+const stopIsEscapeKey = (element) => {
+  element.addEventListener('keydown', (evt) => {
+    if (isEscapeKey(evt)) {
+      evt.stopPropagation();
+    }
+  });
+};
+
+
+function onModalEscapeKeydown(callback) {
+  document.addEventListener('keydown', (evt) => {
+    if (isEscapeKey(evt)) {
+      evt.preventDefault();
+      callback();
+    }
+  }, { once: true });
+}
+const checkStringLength = (string, maxLength) => string.length <= maxLength;
+const isRepeatElement = (array) => array.length !== new Set(array).size;
+
+export { isEscapeKey };
+export { getRandomNumber };
+export { checkStringLength };
+export { isRepeatElement };
+export { generatesUniqueId };
+export { onModalEscapeKeydown };
+export { stopIsEscapeKey };
