@@ -4,6 +4,7 @@ const commentsContainer = document.querySelector('.social__comments');
 const closeModalButton = document.querySelector('.big-picture__cancel');
 const modalBigPicture = document.querySelector('.big-picture');
 const count = document.querySelector('.social__comment-shown-count');
+const btnLoader = document.querySelector('.comments-loader');
 let showCount = 5;
 
 function commentFilterDefault() {
@@ -24,6 +25,7 @@ function getComment() {
     count.innerHTML = i + 1;
     if (i === commentsContainer.querySelectorAll('.social__comment').length - 1) {
       count.textContent = commentsContainer.querySelectorAll('.social__comment').length;
+      btnLoader.classList.add('hidden');
       return count;
     }
   }
