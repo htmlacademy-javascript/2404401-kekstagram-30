@@ -1,7 +1,7 @@
 import { stopIsEscapeKey } from './util.js';
 import { onModalEscapeKeydown } from './util.js';
 import { hashtagInput, commentsInput, pristine } from './form-validation.js';
-import { init, reset } from './filter.js';
+import { init } from './filter.js';
 import { resetScale } from './scale.js';
 
 const openUploadPictureBtn = document.querySelector('.img-upload__input');
