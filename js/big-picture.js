@@ -7,6 +7,7 @@ const infoModalBigPicture = document.querySelector('.big-picture__social');
 const miniaturePictures = placePictures.querySelectorAll('.picture');
 const closeModalButton = modalBigPicture.querySelector('.big-picture__cancel');
 const inputCommentBigPicture = document.querySelector('.social__footer-text');
+const btnLoader = document.querySelector('.comments-loader');
 
 function closeModalBigPicture() {
   modalBigPicture.classList.add('hidden');
@@ -14,6 +15,7 @@ function closeModalBigPicture() {
 }
 function openModalBigPicture() {
   modalBigPicture.classList.remove('hidden');
+  btnLoader.classList.remove('hidden');
   document.querySelector('body').classList.add('modal-open');
 }
 

@@ -1,6 +1,8 @@
 import { stopIsEscapeKey } from './util.js';
 import { onModalEscapeKeydown } from './util.js';
 import { hashtagInput, commentsInput, pristine } from './form-validation.js';
+import { init } from './filter.js';
+import { resetScale } from './scale.js';
 
 const openUploadPictureBtn = document.querySelector('.img-upload__input');
 const overlayPicture = document.querySelector('.img-upload__overlay');
@@ -13,6 +15,7 @@ function closeModalUpload() {
   hashtagInput.value = '';
   commentsInput.value = '';
   pristine.reset();
+  resetScale();
 }
 
 hashtagInput.addEventListener('blur', () => {
@@ -24,6 +27,7 @@ stopIsEscapeKey(commentsInput);
 function openModalUpload() {
   overlayPicture.classList.remove('hidden');
   document.querySelector('body').classList.add('modal-open');
+  init();
   onModalEscapeKeydown(closeModalUpload);
 }
 
