@@ -2,6 +2,7 @@ import { stopIsEscapeKey } from './util.js';
 import { onModalEscapeKeydown } from './util.js';
 import { hashtagInput, commentsInput, pristine } from './form-validation.js';
 import { init, reset } from './filter.js';
+import { resetScale } from './scale.js';
 
 const openUploadPictureBtn = document.querySelector('.img-upload__input');
 const overlayPicture = document.querySelector('.img-upload__overlay');
@@ -14,6 +15,7 @@ function closeModalUpload() {
   hashtagInput.value = '';
   commentsInput.value = '';
   pristine.reset();
+  resetScale();
 }
 
 hashtagInput.addEventListener('blur', () => {

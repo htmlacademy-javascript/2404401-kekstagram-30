@@ -1,4 +1,5 @@
 import { EFFECT, EFFECT_FILTER, EFFECT_OPTIONS } from './filter-util';
+import { resetScale } from './scale.js';
 
 const modalElement = document.querySelector('.img-upload');
 const imageElement = modalElement.querySelector('.img-upload__preview img');
@@ -58,6 +59,7 @@ function updateSlider({ min, max, step }) {
     step,
     start: max,
   });
+  resetScale();
 }
 
 function setSlider() {
