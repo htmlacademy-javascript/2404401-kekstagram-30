@@ -7,3 +7,6 @@ import { checksFormValidation } from './form-validation.js';
 openUploadPicture();
 checksFormValidation();
 openUploadPicture();
+
+
+//TODO: esc не работает в инпуте при загрузке изобр. Проверить Листенеры(накопление) 9.13
