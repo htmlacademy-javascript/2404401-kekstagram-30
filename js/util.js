@@ -18,4 +18,14 @@ function generatesUniqueId(min, max) {
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-export { getRandomNumber, generatesUniqueId, isEscapeKey };
+function onModalEscapeKeydown(callback) {
+  document.addEventListener('keydown', (evt) => {
+    if (isEscapeKey(evt)) {
+      evt.preventDefault();
+      callback();
+    }
+  }, { once: true });
+}
+
+export { isEscapeKey };
+export { getRandomNumber, generatesUniqueId, onModalEscapeKeydown };
