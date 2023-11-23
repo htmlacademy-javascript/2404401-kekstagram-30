@@ -20,6 +20,11 @@ function onBiggerButton() {
 }
 
 function scaleTransformElement(value) {
+  if (value >= 100) {
+    value = 100;
+    return;
+  }
+  //временно, почему-то не работает.
   imageElement.style.transform = `scale(${value / 100})`;
   scaleСounter.value = `${value}%`;
 }
