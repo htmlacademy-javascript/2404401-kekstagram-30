@@ -37,4 +37,4 @@ function openUploadPicture() {
 
 closeUploadPictureBtn.addEventListener('click', closeModalUpload);
 
-export { openUploadPicture };
+export { openUploadPicture, closeModalUpload };

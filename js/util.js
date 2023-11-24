@@ -25,7 +25,6 @@ const stopIsEscapeKey = (element) => {
   });
 };
 
-
 function onModalEscapeKeydown(callback) {
   document.addEventListener('keydown', (evt) => {
     if (isEscapeKey(evt)) {
@@ -36,6 +35,7 @@ function onModalEscapeKeydown(callback) {
 }
 const checkStringLength = (string, maxLength) => string.length <= maxLength;
 const isRepeatElement = (array) => array.length !== new Set(array).size;
+
 
 export { isEscapeKey };
 export { getRandomNumber };

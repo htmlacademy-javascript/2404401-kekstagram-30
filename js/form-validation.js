@@ -1,10 +1,14 @@
 /* eslint-disable no-console */
 import { isRepeatElement } from './util.js';
 import { checkStringLength } from './util.js';
+import { sendDataForServer } from './api.js';
+import { successMessages } from './error-util.js';
+import { errorMessageForPost } from './error-util.js';
 
 const formUploadFoto = document.querySelector('.img-upload__form');
 const hashtagInput = document.querySelector('.text__hashtags');
 const commentsInput = document.querySelector('.text__description');
+const submitButton = document.querySelector('.img-upload__submit');
 const HASH_TAG_PATTERN = /^#[a-zа-яё0-9]{1,19}$/i;
 const MAX_HASHTAG_AMOUNT = 5;
 const MAX_LENGTH_COMMENT = 140;
@@ -15,7 +19,7 @@ const pristine = new Pristine(formUploadFoto, {
   errorTextClass: 'img-upload__field-wrapper--error',
 });
 
-const checksFormValidation = () => {
+const checksFormValidation = (onSuccess) => {
   formUploadFoto.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
@@ -23,6 +27,15 @@ const checksFormValidation = () => {
 
     if (isValid) {
       console.log('можно отправлять');
+      submitButton.disabled = true;
+      sendDataForServer(new FormData(evt.target), successMessages)
+        .then(onSuccess)
+        .catch(() => {
+          errorMessageForPost();
+        })
+        .finally(() => {
+          submitButton.disabled = false;
+        });
     } else {
       console.log('нельзя отправлять');
     }
