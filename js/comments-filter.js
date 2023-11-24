@@ -1,4 +1,4 @@
-// import { arrayObjectPosts } from './data';
+// import { arrayObjectPosts } from './api.js';
 const COMMENT_COUNT = 5;
 const commentsContainer = document.querySelector('.social__comments');
 const closeModalButton = document.querySelector('.big-picture__cancel');
@@ -12,6 +12,9 @@ function commentFilterDefault() {
     for (let i = 5; i < commentsContainer.children.length; i++) {
       commentsContainer.children[i].classList.add('hidden');
     }
+  } else {
+    count.textContent = commentsContainer.querySelectorAll('.social__comment').length;
+    btnLoader.classList.add('hidden');
   }
 }
 function closeModalBigPicture() {

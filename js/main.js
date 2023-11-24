@@ -1,12 +1,12 @@
 /* eslint-disable no-unused-vars */
-import { placePictures } from './get-picture';
-import { miniaturePictures } from './big-picture';
-import { openUploadPicture } from './form.js';
+import { getDataFromServer } from './api';
+import { getPictures } from './big-picture';
+import { openUploadPicture, closeModalUpload } from './form.js';
 import { checksFormValidation } from './form-validation.js';
 
-openUploadPicture();
-checksFormValidation();
-openUploadPicture();
 
+getDataFromServer(getPictures);
+openUploadPicture();
+checksFormValidation(closeModalUpload);
 
-//TODO: esc не работает в инпуте при загрузке изобр. Проверить Листенеры(накопление) 9.13, scale уходит больше 100%
+//TODO: esc не работает в инпуте при загрузке изобр. Проверить Листенеры(накопление) 9.13
