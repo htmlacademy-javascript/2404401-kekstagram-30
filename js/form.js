@@ -1,17 +1,28 @@
 import { stopIsEscapeKey } from './util.js';
 import { onModalEscapeKeydown } from './util.js';
-import { hashtagInput, commentsInput, pristine } from './form-validation.js';
+import { hashtagInput, commentsInput, pristine, isValidType } from './form-validation.js';
 import { init } from './filter.js';
 import { resetScale } from './scale.js';
 
-const openUploadPictureBtn = document.querySelector('.img-upload__input');
+const openUploadPicture = document.querySelector('.img-upload__input');
 const overlayPicture = document.querySelector('.img-upload__overlay');
 const closeUploadPictureBtn = document.querySelector('.img-upload__cancel');
+const previewPhoto = document.querySelector('.img-upload__preview img');
+const previewEffects = document.querySelectorAll('.effects__label span');
 
+function uploadModalPicture() {
+  const file = openUploadPicture.files[0];
+  if (file && isValidType(file)) {
+    previewPhoto.src = URL.createObjectURL(file);
+    previewEffects.forEach((element) => {
+      element.style.backgroundImage = `url(${previewPhoto.src})`;
+    });
+  }
+}
 function closeModalUpload() {
   overlayPicture.classList.add('hidden');
   document.querySelector('body').classList.remove('modal-open');
-  openUploadPictureBtn.value = '';
+  openUploadPicture.value = '';
   hashtagInput.value = '';
   commentsInput.value = '';
   pristine.reset();
@@ -31,10 +42,13 @@ function openModalUpload() {
   onModalEscapeKeydown(closeModalUpload);
 }
 
-function openUploadPicture() {
-  openUploadPictureBtn.addEventListener('change', openModalUpload);
+function openUploadPictureModal() {
+  openUploadPicture.addEventListener('change', () => {
+    openModalUpload();
+    uploadModalPicture();
+  });
+  closeUploadPictureBtn.addEventListener('click', closeModalUpload);
 }
 
-closeUploadPictureBtn.addEventListener('click', closeModalUpload);
 
-export { openUploadPicture, closeModalUpload };
+export { openUploadPictureModal, closeModalUpload };

@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { isRepeatElement } from './util.js';
 import { checkStringLength } from './util.js';
 import { sendDataForServer } from './api.js';
@@ -9,9 +8,15 @@ const formUploadFoto = document.querySelector('.img-upload__form');
 const hashtagInput = document.querySelector('.text__hashtags');
 const commentsInput = document.querySelector('.text__description');
 const submitButton = document.querySelector('.img-upload__submit');
+const FILE_TYPES = ['jpeg', 'png', 'jpg', 'heic'];
 const HASH_TAG_PATTERN = /^#[a-zа-яё0-9]{1,19}$/i;
 const MAX_HASHTAG_AMOUNT = 5;
 const MAX_LENGTH_COMMENT = 140;
+
+function isValidType(file) {
+  const fileName = file.name.toLowerCase();
+  return FILE_TYPES.some((it) => fileName.endsWith(it));
+}
 
 const pristine = new Pristine(formUploadFoto, {
   classTo: 'form-group',
@@ -19,14 +24,13 @@ const pristine = new Pristine(formUploadFoto, {
   errorTextClass: 'img-upload__field-wrapper--error',
 });
 
-const checksFormValidation = (onSuccess) => {
+const checksFormValidator = (onSuccess) => {
   formUploadFoto.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
     const isValid = pristine.validate();
 
     if (isValid) {
-      console.log('можно отправлять');
       submitButton.disabled = true;
       sendDataForServer(new FormData(evt.target), successMessages)
         .then(onSuccess)
@@ -36,8 +40,6 @@ const checksFormValidation = (onSuccess) => {
         .finally(() => {
           submitButton.disabled = false;
         });
-    } else {
-      console.log('нельзя отправлять');
     }
   });
 };
@@ -76,4 +78,4 @@ pristine.addValidator(commentsInput, (value) => checkStringLength(value, MAX_LEN
 );
 
 export { hashtagInput, commentsInput };
-export { pristine, checksFormValidation };
+export { pristine, checksFormValidator, isValidType };

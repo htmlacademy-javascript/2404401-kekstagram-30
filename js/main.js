@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 import { getDataFromServer } from './api';
 import { getBigPictures } from './big-picture';
-import { openUploadPicture, closeModalUpload } from './form.js';
-import { checksFormValidation } from './form-validation.js';
+import { openUploadPictureModal, closeModalUpload } from './form.js';
+import { checksFormValidator } from './form-validation.js';
 import { initFilter } from './image-fiters.js';
 import { createPosts } from './get-picture.js';
 
@@ -11,8 +11,8 @@ getDataFromServer((createContent) => {
   getBigPictures(createContent);
   initFilter(createContent);
 });
-openUploadPicture();
-checksFormValidation(closeModalUpload);
+openUploadPictureModal();
+checksFormValidator(closeModalUpload);
 
 //TODO: esc не работает в инпуте при загрузке изобр. Проверить Листенеры(накопление) 9.13
 //TODO: ошибка ЮАЙ слайдера при отправке изображения (повторной отправки)
