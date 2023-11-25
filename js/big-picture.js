@@ -1,4 +1,3 @@
-import { array } from './get-picture.js';
 import { onModalEscapeKeydown } from './util.js';
 import { getCommentsList } from './comments.js';
 
@@ -17,14 +16,11 @@ function openModalBigPicture() {
   btnLoader.classList.remove('hidden');
   document.querySelector('body').classList.add('modal-open');
 }
-
-
 inputCommentBigPicture.addEventListener('blur', () => {
   onModalEscapeKeydown(closeModalBigPicture);
 });
 
-function getPictures(data) {
-  array(data);
+function getBigPictures(data) {
   const miniaturePictures = document.querySelectorAll('.picture');
   miniaturePictures.forEach((miniaturePicture) => {
     miniaturePicture.addEventListener('click', (evt) => {
@@ -43,4 +39,4 @@ function getPictures(data) {
   });
 }
 closeModalButton.addEventListener('click', closeModalBigPicture);
-export { getPictures };
+export { getBigPictures };

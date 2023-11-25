@@ -1,12 +1,21 @@
 /* eslint-disable no-unused-vars */
 import { getDataFromServer } from './api';
-import { getPictures } from './big-picture';
+import { getBigPictures } from './big-picture';
 import { openUploadPicture, closeModalUpload } from './form.js';
 import { checksFormValidation } from './form-validation.js';
+import { initFilter } from './image-fiters.js';
+import { createPosts } from './get-picture.js';
 
-
-getDataFromServer(getPictures);
+getDataFromServer((createContent) => {
+  createPosts(createContent);
+  getBigPictures(createContent);
+  initFilter(createContent);
+});
 openUploadPicture();
 checksFormValidation(closeModalUpload);
 
 //TODO: esc не работает в инпуте при загрузке изобр. Проверить Листенеры(накопление) 9.13
+//TODO: ошибка ЮАЙ слайдера при отправке изображения (повторной отправки)
+//TODO: При закрытии модального окна формы, изображение остается с темже зумом
+//TODO: При убавлении зума в форме, невозможно увеличить заного картинку
+//TODO: форма ограничение комментария 140
