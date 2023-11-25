@@ -15,7 +15,6 @@ function getDataFromServer(createContent) {
       return response.json();
     })
     .then((pictures) => createContent(pictures))
-    // eslint-disable-next-line no-undef
     .catch(() => errorMessagesForGet());
 }
 const sendDataForServer = (body, success) => fetch(

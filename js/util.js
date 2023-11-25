@@ -1,20 +1,3 @@
-function getRandomNumber (min, max) {
-  const lower = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
-  const upper = Math.floor(Math.max(Math.abs(min), Math.abs(max)));
-  const number = Math.random() * (upper - lower + 1) + lower;
-  return Math.floor(number);
-}
-function generatesUniqueId(min, max) {
-  const ARRAY_ID = [];
-  return function () {
-    let num = getRandomNumber(min, max);
-    while (ARRAY_ID.includes(num)){
-      num = getRandomNumber(min, max);
-    }
-    ARRAY_ID.push(num);
-    return num;
-  };
-}
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
 const stopIsEscapeKey = (element) => {
@@ -25,22 +8,38 @@ const stopIsEscapeKey = (element) => {
   });
 };
 
-function onModalEscapeKeydown(callback) {
+function onModalEscapeKeydown(cb) {
   document.addEventListener('keydown', (evt) => {
     if (isEscapeKey(evt)) {
       evt.preventDefault();
-      callback();
+      cb();
     }
   }, { once: true });
 }
 const checkStringLength = (string, maxLength) => string.length <= maxLength;
 const isRepeatElement = (array) => array.length !== new Set(array).size;
+function debounce (callback, timeoutDelay = 500) {
+  // Используем замыкания, чтобы id таймаута у нас навсегда приклеился
+  // к возвращаемой функции с setTimeout, тогда мы его сможем перезаписывать
+  let timeoutId;
+
+  return (...rest) => {
+    // Перед каждым новым вызовом удаляем предыдущий таймаут,
+    // чтобы они не накапливались
+    clearTimeout(timeoutId);
+
+    // Затем устанавливаем новый таймаут с вызовом колбэка на ту же задержку
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+
+    // Таким образом цикл «поставить таймаут - удалить таймаут» будет выполняться,
+    // пока действие совершается чаще, чем переданная задержка timeoutDelay
+  };
+}
 
 
+export {debounce};
 export { isEscapeKey };
-export { getRandomNumber };
 export { checkStringLength };
 export { isRepeatElement };
-export { generatesUniqueId };
 export { onModalEscapeKeydown };
 export { stopIsEscapeKey };

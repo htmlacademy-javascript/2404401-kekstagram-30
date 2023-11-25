@@ -2,7 +2,7 @@ const templatePicture = document.querySelector('#picture').content;
 const placePictures = document.querySelector('.pictures');
 
 const picturesFragment = document.createDocumentFragment();
-function array(arrayPhoto){
+function createPosts(arrayPhoto){
   arrayPhoto.forEach(({url, description, likes, comments, id}) => {
     const picture = templatePicture.cloneNode(true);
     picture.querySelector('.picture__img').src = url;
@@ -17,4 +17,4 @@ function array(arrayPhoto){
 }
 
 
-export {array};
+export {createPosts};
