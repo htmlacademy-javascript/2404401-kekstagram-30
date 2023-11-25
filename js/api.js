@@ -1,4 +1,4 @@
-import { errorMessagesForGet } from './error-util.js';
+import { errorMessagesForGet, successMessages } from './error-util.js';
 const ACADEMY_LINK = 'https://30.javascript.pages.academy/kekstagram';
 const Route = {
   GET_DATA: '/data',
@@ -17,7 +17,7 @@ function getDataFromServer(createContent) {
     .then((pictures) => createContent(pictures))
     .catch(() => errorMessagesForGet());
 }
-const sendDataForServer = (body, success) => fetch(
+const sendDataForServer = (body) => fetch(
   `${ACADEMY_LINK}${Route.SEND_DATA}`,
   {
     method: 'POST',
@@ -27,6 +27,6 @@ const sendDataForServer = (body, success) => fetch(
     if (!response.ok) {
       throw new Error();
     }
-    success();
+    successMessages();
   });
 export {getDataFromServer, sendDataForServer };
