@@ -20,7 +20,7 @@ function onBiggerButton() {
 }
 
 function scaleTransformElement(value) {
-  if (value >= 100) {
+  if (value > 100) {
     value = 100;
     return;
   }
