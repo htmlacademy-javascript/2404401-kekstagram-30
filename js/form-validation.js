@@ -8,7 +8,7 @@ const formUploadFoto = document.querySelector('.img-upload__form');
 const hashtagInput = document.querySelector('.text__hashtags');
 const commentsInput = document.querySelector('.text__description');
 const submitButton = document.querySelector('.img-upload__submit');
-const FILE_TYPES = ['jpeg', 'png', 'jpg', 'heic'];
+const FILE_TYPES = ['jpeg', 'png', 'jpg'];
 const HASH_TAG_PATTERN = /^#[a-zа-яё0-9]{1,19}$/i;
 const MAX_HASHTAG_AMOUNT = 5;
 const MAX_LENGTH_COMMENT = 140;
@@ -24,7 +24,7 @@ const pristine = new Pristine(formUploadFoto, {
   errorTextClass: 'img-upload__field-wrapper--error',
 });
 
-const checksFormValidator = (onSuccess) => {
+function checksFormValidator(onSuccess) {
   formUploadFoto.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
@@ -42,7 +42,7 @@ const checksFormValidator = (onSuccess) => {
         });
     }
   });
-};
+}
 
 pristine.addValidator(hashtagInput, () => {
   const hashtagArray = hashtagInput.value.toLowerCase().replace(/ +/g, ' ').trim().split(' ');

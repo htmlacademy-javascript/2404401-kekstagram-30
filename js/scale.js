@@ -16,15 +16,10 @@ function onSmallerButton() {
   scaleTransformElement(Math.max(parseInt(scaleСounter.value, 10) - SCALE_STEP, MIN_SCALE));
 }
 function onBiggerButton() {
-  scaleTransformElement(Math.max(parseInt(scaleСounter.value, 10) + SCALE_STEP, MAX_SCALE));
+  scaleTransformElement(Math.min(parseInt(scaleСounter.value, 10) + SCALE_STEP, MAX_SCALE));
 }
 
 function scaleTransformElement(value) {
-  if (value > 100) {
-    value = 100;
-    return;
-  }
-  //временно, почему-то не работает.
   imageElement.style.transform = `scale(${value / 100})`;
   scaleСounter.value = `${value}%`;
 }

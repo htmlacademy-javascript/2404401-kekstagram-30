@@ -1,7 +1,7 @@
 import { stopIsEscapeKey } from './util.js';
 import { onModalEscapeKeydown } from './util.js';
 import { hashtagInput, commentsInput, pristine, isValidType } from './form-validation.js';
-import { init } from './filter.js';
+import { init, destroySlider } from './filter.js';
 import { resetScale } from './scale.js';
 
 const openUploadPicture = document.querySelector('.img-upload__input');
@@ -27,6 +27,7 @@ function closeModalUpload() {
   commentsInput.value = '';
   pristine.reset();
   resetScale();
+  destroySlider();
 }
 
 hashtagInput.addEventListener('blur', () => {
