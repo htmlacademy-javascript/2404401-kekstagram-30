@@ -1,5 +1,4 @@
 import { onModalEscapeKeydown } from './util';
-import { closeModalUpload } from './form.js';
 
 const errorMessageGetTemplate = document.querySelector('#data-error').content;
 const successMessageTemplate = document.querySelector('#success').content;
@@ -30,7 +29,6 @@ const successMessages = () => {
 
   const closeSuccessWindow = () => {
     document.querySelector('.success').remove();
-    closeModalUpload();
   };
 
   onModalEscapeKeydown(closeSuccessWindow);
