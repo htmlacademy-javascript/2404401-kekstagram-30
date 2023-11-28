@@ -25,7 +25,6 @@ const successMessages = () => {
 
   const buttonCloseSuccess = document.querySelector('.success__button');
   const overlayForSuccess = document.querySelector('.success');
-  const successContainer = document.querySelector('.success__inner');
 
   const closeSuccessWindow = () => {
     document.querySelector('.success').remove();
@@ -34,7 +33,6 @@ const successMessages = () => {
   onModalEscapeKeydown(closeSuccessWindow);
   buttonCloseSuccess.addEventListener('click', (closeSuccessWindow));
   overlayForSuccess.addEventListener('click', (closeSuccessWindow));
-  successContainer.addEventListener('click', (evt) => evt.stopPropagation());
 
 };
 const errorMessageForPost = () => {
@@ -51,7 +49,7 @@ const errorMessageForPost = () => {
   const closeErrorWindow = () => {
     document.querySelector('.error').remove();
   };
-
+  onModalEscapeKeydown(closeErrorWindow);
   buttonCloseError.addEventListener('click', (closeErrorWindow));
   overlayForError.addEventListener('click', (closeErrorWindow));
   errorContainer.addEventListener('click', (evt) => evt.stopPropagation());
