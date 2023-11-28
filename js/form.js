@@ -1,5 +1,5 @@
-import { stopIsEscapeKey } from './util.js';
 import { onModalEscapeKeydown } from './util.js';
+import { popupIsEscapeKey } from './util.js';
 import { hashtagInput, commentsInput, pristine, isValidType } from './form-validation.js';
 import { init, destroySlider } from './filter.js';
 import { resetScale } from './scale.js';
@@ -28,13 +28,14 @@ function closeModalUpload() {
   pristine.reset();
   resetScale();
   destroySlider();
+  document.removeEventListener('keydown', onModalEscapeKeydown);
 }
 
 hashtagInput.addEventListener('blur', () => {
   onModalEscapeKeydown(closeModalUpload);
 });
-stopIsEscapeKey(hashtagInput);
-stopIsEscapeKey(commentsInput);
+popupIsEscapeKey(hashtagInput);
+popupIsEscapeKey(commentsInput);
 
 function openModalUpload() {
   overlayPicture.classList.remove('hidden');

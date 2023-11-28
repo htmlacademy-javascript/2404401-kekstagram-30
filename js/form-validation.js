@@ -33,7 +33,10 @@ function checksFormValidator(onSuccess) {
     if (isValid) {
       submitButton.disabled = true;
       sendDataForServer(new FormData(evt.target), successMessages)
-        .then(onSuccess)
+        .then(() => {
+          onSuccess();
+          document.removeEventListener('keydown', onSuccess);
+        })
         .catch(() => {
           errorMessageForPost();
         })
