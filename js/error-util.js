@@ -1,4 +1,4 @@
-import { onModalEscapeKeydown } from './util';
+import { onModalEscapeKeydown} from './util';
 
 const errorMessageGetTemplate = document.querySelector('#data-error').content;
 const successMessageTemplate = document.querySelector('#success').content;
@@ -17,43 +17,34 @@ const errorMessagesForGet = () => {
   }, ALERT_SHOW_TIME);
 };
 
-const successMessages = () => {
+
+function successMessages() {
   const createSuccessMessage = document.createDocumentFragment();
   const successMessage = successMessageTemplate.cloneNode(true);
   createSuccessMessage.appendChild(successMessage);
   document.body.appendChild(createSuccessMessage);
 
-  const buttonCloseSuccess = document.querySelector('.success__button');
-  const overlayForSuccess = document.querySelector('.success');
-
-  const closeSuccessWindow = () => {
+  function closeSuccessWindow() {
     document.querySelector('.success').remove();
-  };
-
-  onModalEscapeKeydown(closeSuccessWindow);
-  buttonCloseSuccess.addEventListener('click', (closeSuccessWindow));
-  overlayForSuccess.addEventListener('click', (closeSuccessWindow));
-
-};
-const errorMessageForPost = () => {
+  }
+  document.addEventListener('keydown', onModalEscapeKeydown(closeSuccessWindow));
+  document.querySelector('.success__button').addEventListener('click', (closeSuccessWindow));
+  document.querySelector('.success').addEventListener('click', (closeSuccessWindow));
+}
+function errorMessageForPost() {
 
   const createErrorMessage = document.createDocumentFragment();
   const errorMessage = errorMessagePostTemplate.cloneNode(true);
   createErrorMessage.appendChild(errorMessage);
   document.body.appendChild(createErrorMessage);
 
-  const buttonCloseError = document.querySelector('.error__button');
-  const overlayForError = document.querySelector('.error');
-  const errorContainer = document.querySelector('.error__inner');
-
-  const closeErrorWindow = () => {
+  function closeErrorWindow() {
     document.querySelector('.error').remove();
-  };
+  }
   onModalEscapeKeydown(closeErrorWindow);
-  buttonCloseError.addEventListener('click', (closeErrorWindow));
-  overlayForError.addEventListener('click', (closeErrorWindow));
-  errorContainer.addEventListener('click', (evt) => evt.stopPropagation());
-};
+  document.querySelector('.error__button').addEventListener('click', (closeErrorWindow));
+  document.querySelector('.error').addEventListener('click', (closeErrorWindow));
+}
 
 export { successMessages };
 export { errorMessagesForGet };

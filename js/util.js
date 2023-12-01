@@ -1,14 +1,7 @@
-const isEscapeKey = (evt) => evt.key === 'Escape';
+function isEscapeKey(evt) {
+  return evt.key === 'Escape';
+}
 const DEBOUNCE_DELAY = 500;
-
-
-const popupIsEscapeKey = (element) => {
-  element.addEventListener('keydown', (evt) => {
-    if (isEscapeKey(evt)) {
-      evt.stopPropagation();
-    }
-  });
-};
 
 function onModalEscapeKeydown(cb) {
   document.addEventListener('keydown', (evt) => {
@@ -35,4 +28,3 @@ export { isEscapeKey };
 export { checkStringLength };
 export { isRepeatElement };
 export { onModalEscapeKeydown };
-export { popupIsEscapeKey };

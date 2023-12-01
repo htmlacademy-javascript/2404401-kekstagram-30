@@ -1,4 +1,4 @@
-// import { arrayObjectPosts } from './api.js';
+
 const COMMENT_COUNT = 5;
 const commentsContainer = document.querySelector('.social__comments');
 const closeModalButton = document.querySelector('.big-picture__cancel');

@@ -1,5 +1,4 @@
 import { onModalEscapeKeydown } from './util.js';
-import { popupIsEscapeKey } from './util.js';
 import { hashtagInput, commentsInput, pristine, isValidType } from './form-validation.js';
 import { init, destroySlider } from './filter.js';
 import { resetScale } from './scale.js';
@@ -13,6 +12,7 @@ const previewEffects = document.querySelectorAll('.effects__label span');
 function uploadModalPicture() {
   const file = openUploadPicture.files[0];
   if (file && isValidType(file)) {
+    document.querySelector('body').classList.add('modal-open');
     previewPhoto.src = URL.createObjectURL(file);
     previewEffects.forEach((element) => {
       element.style.backgroundImage = `url(${previewPhoto.src})`;
@@ -27,21 +27,21 @@ function closeModalUpload() {
   commentsInput.value = '';
   pristine.reset();
   resetScale();
+  previewPhoto.removeAttribute('class');
+  previewPhoto.removeAttribute('style');
   destroySlider();
-  document.removeEventListener('keydown', onModalEscapeKeydown);
+  document.removeEventListener('keydown', onModalEscapeKeydown(closeModalUpload));
 }
 
-hashtagInput.addEventListener('blur', () => {
-  onModalEscapeKeydown(closeModalUpload);
-});
-popupIsEscapeKey(hashtagInput);
-popupIsEscapeKey(commentsInput);
+// onModalEscapeKeydown(hashtagInput);
+// onModalEscapeKeydown(commentsInput);
+
 
 function openModalUpload() {
   overlayPicture.classList.remove('hidden');
   document.querySelector('body').classList.add('modal-open');
   init();
-  onModalEscapeKeydown(closeModalUpload);
+  document.removeEventListener('keydown', onModalEscapeKeydown(closeModalUpload));
 }
 
 function openUploadPictureModal() {
@@ -49,8 +49,6 @@ function openUploadPictureModal() {
     openModalUpload();
     uploadModalPicture();
   });
-  closeUploadPictureBtn.addEventListener('click', closeModalUpload);
 }
-
-
+closeUploadPictureBtn.addEventListener('click', closeModalUpload);
 export { openUploadPictureModal, closeModalUpload };
