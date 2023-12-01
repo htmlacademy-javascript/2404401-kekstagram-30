@@ -30,7 +30,6 @@ function closeModalUpload() {
   previewPhoto.removeAttribute('class');
   previewPhoto.removeAttribute('style');
   destroySlider();
-  document.removeEventListener('keydown', onModalEscapeKeydown(closeModalUpload));
 }
 
 // onModalEscapeKeydown(hashtagInput);
