@@ -1,6 +1,6 @@
 import { onModalEscapeKeydown } from './util.js';
 import { hashtagInput, commentsInput, pristine, isValidType } from './form-validation.js';
-import { init, destroySlider } from './filter.js';
+import { init as initEffect} from './filter.js';
 import { resetScale } from './scale.js';
 
 const openUploadPicture = document.querySelector('.img-upload__input');
@@ -8,6 +8,8 @@ const overlayPicture = document.querySelector('.img-upload__overlay');
 const closeUploadPictureBtn = document.querySelector('.img-upload__cancel');
 const previewPhoto = document.querySelector('.img-upload__preview img');
 const previewEffects = document.querySelectorAll('.effects__label span');
+
+initEffect();
 
 function uploadModalPicture() {
   const file = openUploadPicture.files[0];
@@ -29,17 +31,15 @@ function closeModalUpload() {
   resetScale();
   previewPhoto.removeAttribute('class');
   previewPhoto.removeAttribute('style');
-  destroySlider();
 }
 
-// onModalEscapeKeydown(hashtagInput);
-// onModalEscapeKeydown(commentsInput);
+onModalEscapeKeydown(hashtagInput);
+onModalEscapeKeydown(commentsInput);
 
 
 function openModalUpload() {
   overlayPicture.classList.remove('hidden');
   document.querySelector('body').classList.add('modal-open');
-  init();
   document.removeEventListener('keydown', onModalEscapeKeydown(closeModalUpload));
 }
 

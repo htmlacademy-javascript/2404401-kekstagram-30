@@ -41,7 +41,7 @@ function errorMessageForPost() {
   function closeErrorWindow() {
     document.querySelector('.error').remove();
   }
-  onModalEscapeKeydown(closeErrorWindow);
+  document.addEventListener('keydown', onModalEscapeKeydown(closeErrorWindow));
   document.querySelector('.error__button').addEventListener('click', (closeErrorWindow));
   document.querySelector('.error').addEventListener('click', (closeErrorWindow));
 }
