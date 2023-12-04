@@ -22,7 +22,7 @@ function closeModalBigPicture() {
   document.querySelector('body').classList.remove('modal-open');
 }
 
-function getComment() {
+function createCommentsList() {
   for (let i = showCount; i < showCount + COMMENT_COUNT; i++) {
     commentsContainer.children[i].classList.remove('hidden');
     count.innerHTML = i + 1;
@@ -41,4 +41,4 @@ closeModalButton.addEventListener('click', () => {
   closeModalBigPicture();
 });
 
-export { getComment, commentFilterDefault, closeModalBigPicture };
+export { createCommentsList, commentFilterDefault, closeModalBigPicture };

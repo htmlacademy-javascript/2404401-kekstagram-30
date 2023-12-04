@@ -1,6 +1,6 @@
-import { onModalEscapeKeydown } from './util.js';
+import { onModalEscapeKeydown, isEscapeKey } from './util.js';
 import { hashtagInput, commentsInput, pristine, isValidType } from './form-validation.js';
-import { init as initEffect} from './filter.js';
+import { init as initEffect, reset as resetEffect} from './filter.js';
 import { resetScale } from './scale.js';
 
 const openUploadPicture = document.querySelector('.img-upload__input');
@@ -11,7 +11,7 @@ const previewEffects = document.querySelectorAll('.effects__label span');
 
 initEffect();
 
-function uploadModalPicture() {
+function uploadModalPictureHandler() {
   const file = openUploadPicture.files[0];
   if (file && isValidType(file)) {
     document.querySelector('body').classList.add('modal-open');
@@ -21,7 +21,7 @@ function uploadModalPicture() {
     });
   }
 }
-function closeModalUpload() {
+function closeModalPictureUploadHandler() {
   overlayPicture.classList.add('hidden');
   document.querySelector('body').classList.remove('modal-open');
   openUploadPicture.value = '';
@@ -29,25 +29,34 @@ function closeModalUpload() {
   commentsInput.value = '';
   pristine.reset();
   resetScale();
+  resetEffect();
   previewPhoto.removeAttribute('class');
   previewPhoto.removeAttribute('style');
 }
 
-onModalEscapeKeydown(hashtagInput);
-onModalEscapeKeydown(commentsInput);
+function onInputCloseEscape(element) {
+  element.addEventListener('keydown', (evt) => {
+    if (isEscapeKey(evt)) {
+      evt.stopPropagation();
+      closeModalPictureUploadHandler();
+    }
+  });
+}
+onInputCloseEscape(hashtagInput);
+onInputCloseEscape(commentsInput);
 
 
 function openModalUpload() {
   overlayPicture.classList.remove('hidden');
   document.querySelector('body').classList.add('modal-open');
-  document.removeEventListener('keydown', onModalEscapeKeydown(closeModalUpload));
+  document.removeEventListener('keydown', onModalEscapeKeydown(closeModalPictureUploadHandler));
 }
 
 function openUploadPictureModal() {
   openUploadPicture.addEventListener('change', () => {
     openModalUpload();
-    uploadModalPicture();
+    uploadModalPictureHandler();
   });
 }
-closeUploadPictureBtn.addEventListener('click', closeModalUpload);
-export { openUploadPictureModal, closeModalUpload };
+closeUploadPictureBtn.addEventListener('click', closeModalPictureUploadHandler);
+export { openUploadPictureModal, closeModalPictureUploadHandler };
