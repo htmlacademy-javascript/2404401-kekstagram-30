@@ -1,14 +1,10 @@
-const isEscapeKey = (evt) => evt.key === 'Escape';
 const DEBOUNCE_DELAY = 500;
+const checkStringLength = (string, maxLength) => string.length <= maxLength;
+const isRepeatElement = (array) => array.length !== new Set(array).size;
 
-
-const popupIsEscapeKey = (element) => {
-  element.addEventListener('keydown', (evt) => {
-    if (isEscapeKey(evt)) {
-      evt.stopPropagation();
-    }
-  });
-};
+function isEscapeKey(evt) {
+  return evt.key === 'Escape';
+}
 
 function onModalEscapeKeydown(cb) {
   document.addEventListener('keydown', (evt) => {
@@ -18,8 +14,6 @@ function onModalEscapeKeydown(cb) {
     }
   }, { once: true });
 }
-const checkStringLength = (string, maxLength) => string.length <= maxLength;
-const isRepeatElement = (array) => array.length !== new Set(array).size;
 function debounce (callback, timeoutDelay = DEBOUNCE_DELAY) {
   let timeoutId;
 
@@ -35,4 +29,3 @@ export { isEscapeKey };
 export { checkStringLength };
 export { isRepeatElement };
 export { onModalEscapeKeydown };
-export { popupIsEscapeKey };

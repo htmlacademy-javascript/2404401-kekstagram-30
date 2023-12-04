@@ -80,9 +80,6 @@ function setEffect(effect) {
 function reset() {
   setEffect(EFFECT.DEFAULT);
 }
-function destroySlider() {
-  sliderElement.noUiSlider.destroy();
-}
 
 function onEffectsChange(evt) {
   setEffect(evt.target.value);
@@ -93,4 +90,4 @@ function init() {
   effectElement.addEventListener('change', onEffectsChange);
 }
 
-export { init, reset, destroySlider };
+export { init, reset };

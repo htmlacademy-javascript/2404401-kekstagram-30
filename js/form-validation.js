@@ -1,8 +1,8 @@
 import { isRepeatElement } from './util.js';
 import { checkStringLength } from './util.js';
 import { sendDataForServer } from './api.js';
-import { successMessages } from './error-util.js';
-import { errorMessageForPost } from './error-util.js';
+import { showSuccessMessage } from './error-util.js';
+import { showErrorMessageForPost } from './error-util.js';
 
 const formUploadFoto = document.querySelector('.img-upload__form');
 const hashtagInput = document.querySelector('.text__hashtags');
@@ -13,16 +13,16 @@ const HASH_TAG_PATTERN = /^#[a-zа-яё0-9]{1,19}$/i;
 const MAX_HASHTAG_AMOUNT = 5;
 const MAX_LENGTH_COMMENT = 140;
 
-function isValidType(file) {
-  const fileName = file.name.toLowerCase();
-  return FILE_TYPES.some((it) => fileName.endsWith(it));
-}
-
 const pristine = new Pristine(formUploadFoto, {
   classTo: 'form-group',
   errorTextTag: 'div',
   errorTextClass: 'img-upload__field-wrapper--error',
 });
+
+function isValidType(file) {
+  const fileName = file.name.toLowerCase();
+  return FILE_TYPES.some((it) => fileName.endsWith(it));
+}
 
 function checksFormValidator(onSuccess) {
   formUploadFoto.addEventListener('submit', (evt) => {
@@ -32,13 +32,13 @@ function checksFormValidator(onSuccess) {
 
     if (isValid) {
       submitButton.disabled = true;
-      sendDataForServer(new FormData(evt.target), successMessages)
+      sendDataForServer(new FormData(evt.target), showSuccessMessage)
         .then(() => {
           onSuccess();
           document.removeEventListener('keydown', onSuccess);
         })
         .catch(() => {
-          errorMessageForPost();
+          showErrorMessageForPost();
         })
         .finally(() => {
           submitButton.disabled = false;

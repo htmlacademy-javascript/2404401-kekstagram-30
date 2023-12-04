@@ -1,12 +1,9 @@
-import { onModalEscapeKeydown } from './util';
-
 const errorMessageGetTemplate = document.querySelector('#data-error').content;
 const successMessageTemplate = document.querySelector('#success').content;
 const errorMessagePostTemplate = document.querySelector('#error').content;
-
 const ALERT_SHOW_TIME = 5000;
 
-const errorMessagesForGet = () => {
+function showErrorMessageForGet() {
   const createErrorMessage = document.createDocumentFragment();
   const errorMessage = errorMessageGetTemplate.cloneNode(true);
   createErrorMessage.appendChild(errorMessage);
@@ -15,46 +12,40 @@ const errorMessagesForGet = () => {
   setTimeout(() => {
     document.querySelector('.data-error').remove();
   }, ALERT_SHOW_TIME);
-};
+}
 
-const successMessages = () => {
+
+function showSuccessMessage() {
   const createSuccessMessage = document.createDocumentFragment();
   const successMessage = successMessageTemplate.cloneNode(true);
   createSuccessMessage.appendChild(successMessage);
   document.body.appendChild(createSuccessMessage);
 
-  const buttonCloseSuccess = document.querySelector('.success__button');
-  const overlayForSuccess = document.querySelector('.success');
-
-  const closeSuccessWindow = () => {
+  function closeSuccessWindowHandler(event) {
+    event.preventDefault();
+    event.stopPropagation();
     document.querySelector('.success').remove();
-  };
-
-  onModalEscapeKeydown(closeSuccessWindow);
-  buttonCloseSuccess.addEventListener('click', (closeSuccessWindow));
-  overlayForSuccess.addEventListener('click', (closeSuccessWindow));
-
-};
-const errorMessageForPost = () => {
+  }
+  document.addEventListener('keydown', closeSuccessWindowHandler);
+  document.querySelector('.success__button').addEventListener('click', closeSuccessWindowHandler);
+  document.querySelector('.success').addEventListener('click', closeSuccessWindowHandler);
+}
+function showErrorMessageForPost() {
 
   const createErrorMessage = document.createDocumentFragment();
   const errorMessage = errorMessagePostTemplate.cloneNode(true);
   createErrorMessage.appendChild(errorMessage);
   document.body.appendChild(createErrorMessage);
 
-  const buttonCloseError = document.querySelector('.error__button');
-  const overlayForError = document.querySelector('.error');
-  const errorContainer = document.querySelector('.error__inner');
-
-  const closeErrorWindow = () => {
+  function closeErrorWindowHandler(event) {
+    event.stopPropagation();
     document.querySelector('.error').remove();
-  };
-  onModalEscapeKeydown(closeErrorWindow);
-  buttonCloseError.addEventListener('click', (closeErrorWindow));
-  overlayForError.addEventListener('click', (closeErrorWindow));
-  errorContainer.addEventListener('click', (evt) => evt.stopPropagation());
-};
+  }
+  document.addEventListener('keydown', closeErrorWindowHandler);
+  document.querySelector('.error__button').addEventListener('click', closeErrorWindowHandler);
+  document.querySelector('.error').addEventListener('click', closeErrorWindowHandler);
+}
 
-export { successMessages };
-export { errorMessagesForGet };
-export { errorMessageForPost };
+export { showSuccessMessage };
+export { showErrorMessageForGet };
+export { showErrorMessageForPost };
